@@ -1,21 +1,21 @@
-import React from 'react'
-import { createNativeStackNavigator } from '@react-navigation/native-stack'
+import React from 'react';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
-import { HomeScreen } from '../../features/home/screen'
-import { UserDetailScreen } from '../../features/user/detail-screen'
-import { SignInScreen } from '../../features/signin/screen'
-import { SignUpScreen } from '../../features/signup/screen'
-import { EmailVerificationScreen } from '../../features/signup/email-verification/screen'
+import { HomeScreen } from '../../features/home/screen';
+import { UserDetailScreen } from '../../features/user/detail-screen';
+import { SignInScreen } from '../../features/signin/screen';
+import { SignUpScreen } from '../../features/signup/screen';
+import { EmailVerificationScreen } from '../../features/signup/email-verification/screen';
 
 const Stack = createNativeStackNavigator<{
-  home: undefined
+  home: undefined;
   'user-detail': {
-    id: string
-  }
-  signin: undefined
-  signup: undefined
-  'email-verification': undefined
-}>()
+    id: string;
+  };
+  signin: undefined;
+  signup: undefined;
+  'email-verification': undefined;
+}>();
 
 export function NativeNavigation() {
   return (
@@ -57,5 +57,5 @@ export function NativeNavigation() {
         }}
       />
     </Stack.Navigator>
-  )
+  );
 }

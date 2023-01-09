@@ -1,19 +1,23 @@
+/* eslint-disable @typescript-eslint/no-unsafe-call */
+/* eslint-disable @typescript-eslint/unbound-method */
+/* eslint-disable node/no-unpublished-require */
 /** @type {import('next').NextConfig} */
-const { withTamagui } = require('@tamagui/next-plugin')
-const withImages = require('next-images')
-const { join } = require('path')
+const { withTamagui } = require('@tamagui/next-plugin');
+const withImages = require('next-images');
+const { join } = require('path');
 
-process.env.IGNORE_TS_CONFIG_PATHS = 'true'
-process.env.TAMAGUI_TARGET = 'web'
-process.env.TAMAGUI_DISABLE_WARN_DYNAMIC_LOAD = '1'
+process.env.IGNORE_TS_CONFIG_PATHS = 'true';
+process.env.TAMAGUI_TARGET = 'web';
+process.env.TAMAGUI_DISABLE_WARN_DYNAMIC_LOAD = '1';
 
 const boolVals = {
   true: true,
   false: false,
-}
+};
 
 const disableExtraction =
-  boolVals[process.env.DISABLE_EXTRACTION] ?? process.env.NODE_ENV === 'development'
+  boolVals[process.env.DISABLE_EXTRACTION] ??
+  process.env.NODE_ENV === 'development';
 
 /* console.log(`
 
@@ -50,14 +54,20 @@ const plugins = [
     disableExtraction,
     // experiment - reduced bundle size react-native-web
     useReactNativeWebLite: false,
-    shouldExtract: (path) => {
+    shouldExtract: path => {
       if (path.includes(join('packages', 'app'))) {
-        return true
+        return true;
       }
     },
-    excludeReactNativeWebExports: ['Switch', 'ProgressBar', 'Picker', 'CheckBox', 'Touchable'],
+    excludeReactNativeWebExports: [
+      'Switch',
+      'ProgressBar',
+      'Picker',
+      'CheckBox',
+      'Touchable',
+    ],
   }),
-]
+];
 
 module.exports = function () {
   /** @type {import('next').NextConfig} */
@@ -80,14 +90,14 @@ module.exports = function () {
       scrollRestoration: true,
       legacyBrowsers: false,
     },
-  }
+  };
 
   for (const plugin of plugins) {
     config = {
       ...config,
       ...plugin(config),
-    }
+    };
   }
 
-  return config
-}
+  return config;
+};

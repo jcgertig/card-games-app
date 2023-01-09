@@ -1,5 +1,10 @@
-import * as AuthSession from 'expo-auth-session'
-import { OAuthStrategy, SetSession, SignUpResource, SignInResource } from '@clerk/types'
+import * as AuthSession from 'expo-auth-session';
+import {
+  OAuthStrategy,
+  SetSession,
+  SignUpResource,
+  SignInResource,
+} from '@clerk/types';
 
 export const handleOAuthSignUp = async (
   strategy: OAuthStrategy,
@@ -9,51 +14,51 @@ export const handleOAuthSignUp = async (
   try {
     const redirectUrl = AuthSession.makeRedirectUri({
       path: '/',
-    })
+    });
 
     await signUp.create({
       strategy: strategy,
       redirectUrl,
-    })
+    });
 
     const {
       verifications: {
         externalAccount: { externalVerificationRedirectURL },
       },
-    } = signUp
+    } = signUp;
 
     const result = await AuthSession.startAsync({
       authUrl: externalVerificationRedirectURL!.toString(),
       returnUrl: redirectUrl,
-    })
+    });
 
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
-    const { type, params } = result || {}
-    console.log
+    const { type, params } = result || {};
+    console.log;
     if (type !== 'success') {
-      throw 'Something went wrong during the OAuth flow. Try again.'
+      throw 'Something went wrong during the OAuth flow. Try again.';
     }
 
     // Get the rotatingTokenNonce from the redirect URL parameters
-    const { rotating_token_nonce: rotatingTokenNonce } = params
+    const { rotating_token_nonce: rotatingTokenNonce } = params;
 
-    await signUp.reload({ rotatingTokenNonce })
+    await signUp.reload({ rotatingTokenNonce });
 
-    const { createdSessionId } = signUp
+    const { createdSessionId } = signUp;
 
     if (!createdSessionId) {
-      throw 'Something went wrong during the Sign up OAuth flow. Please ensure that all sign in requirements are met.'
+      throw 'Something went wrong during the Sign up OAuth flow. Please ensure that all sign in requirements are met.';
     }
 
-    await setSession(createdSessionId)
+    await setSession(createdSessionId);
 
-    return
+    return;
   } catch (err) {
-    console.log(JSON.stringify(err, null, 2))
-    console.log('error signing up', err)
+    console.log(JSON.stringify(err, null, 2));
+    console.log('error signing up', err);
   }
-}
+};
 export const handleOAuthSignIn = async (
   strategy: OAuthStrategy,
   setSession: SetSession,
@@ -62,48 +67,48 @@ export const handleOAuthSignIn = async (
   try {
     const redirectUrl = AuthSession.makeRedirectUri({
       path: '/oauth-native-callback',
-    })
+    });
     //option is either discord, google, or apple
     //switch statement to handle each option
 
     await signIn.create({
       strategy: strategy,
       redirectUrl,
-    })
+    });
 
     const {
       firstFactorVerification: { externalVerificationRedirectURL },
-    } = signIn
+    } = signIn;
 
     const result = await AuthSession.startAsync({
       authUrl: externalVerificationRedirectURL!.toString(),
       returnUrl: redirectUrl,
-    })
+    });
 
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
-    const { type, params } = result || {}
-    console.log
+    const { type, params } = result || {};
+    console.log;
     if (type !== 'success') {
-      throw 'Something went wrong during the OAuth flow. Try again.'
+      throw 'Something went wrong during the OAuth flow. Try again.';
     }
 
     // Get the rotatingTokenNonce from the redirect URL parameters
-    const { rotating_token_nonce: rotatingTokenNonce } = params
+    const { rotating_token_nonce: rotatingTokenNonce } = params;
 
-    await signIn.reload({ rotatingTokenNonce })
+    await signIn.reload({ rotatingTokenNonce });
 
-    const { createdSessionId } = signIn
+    const { createdSessionId } = signIn;
 
     if (!createdSessionId) {
-      throw 'Something went wrong during the Sign in OAuth flow. Please ensure that all sign in requirements are met.'
+      throw 'Something went wrong during the Sign in OAuth flow. Please ensure that all sign in requirements are met.';
     }
 
-    await setSession(createdSessionId)
+    await setSession(createdSessionId);
 
-    return
+    return;
   } catch (err) {
-    console.log(JSON.stringify(err, null, 2))
-    console.log('error signing in', err)
+    console.log(JSON.stringify(err, null, 2));
+    console.log('error signing in', err);
   }
-}
+};

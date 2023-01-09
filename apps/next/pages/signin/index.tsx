@@ -1,3 +1,3 @@
-import { SignInScreen } from 'app/features/signin/screen'
+import { SignInScreen } from 'app/features/signin/screen';
 
-export default SignInScreen
+export default SignInScreen;

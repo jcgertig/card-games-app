@@ -29,7 +29,14 @@
     "types": ["node"],
     "lib": ["es2021", "dom", "esnext"]
   },
-  "exclude": ["_"],
+  "exclude": [
+    "_",
+    "node_modules",
+    "babel.config.js",
+    "metro.config.js",
+    "jest.config.js",
+    ".eslintrc.js",
+  ],
   "typeAcquisition": {
     "enable": true
   }

@@ -2,6 +2,8 @@
 // instead, we just have a no-op here
 // for more, see: https://solito.dev/recipes/tree-shaking
 
-export const NavigationProvider = ({ children }: { children: React.ReactElement }) => (
-  <>{children}</>
-)
+export const NavigationProvider = ({
+  children,
+}: {
+  children: React.ReactElement;
+}) => <>{children}</>;
