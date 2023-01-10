@@ -1,21 +1,21 @@
 import { YStack } from '@my/ui';
-import { useSignIn } from 'app/utils/clerk';
+import { useAuth, useSignIn } from 'app/utils/clerk';
 import { OAuthStrategy } from '@clerk/types';
 import { useRouter } from 'solito/router';
 import { SignUpSignInComponent } from '@my/ui/src/components/SignUpSignIn';
 import { handleOAuthSignIn } from 'app/utils/auth';
 
-// const getBaseUrl = () => {
-//   if (typeof window !== 'undefined') return ''; // browser should use relative url
-//   if (process.env.VERCEL_URL) return `https://${process.env.VERCEL_URL}`; // SSR should use vercel url
-
-//   return `http://localhost:${process.env.PORT ?? 3000}`; // dev SSR should use localhost
-// };
-
 export function SignInScreen() {
   const { push } = useRouter();
 
   const { isLoaded, signIn, setSession } = useSignIn();
+
+  const { isSignedIn } = useAuth();
+  if (isSignedIn) {
+    push('/');
+    return null;
+  }
+
   if (!setSession) return null;
   if (!isLoaded) return null;
 
@@ -30,11 +30,11 @@ export function SignInScreen() {
     redirectIfSignedIn();
   };
 
-  const handleEmailSignInWithPress = async (emailAddress, password) => {
-    await signIn.create({
-      identifier: emailAddress,
-      password,
-    });
+  const handleEmailSignInWithPress = async (
+    identifier: string,
+    password: string
+  ) => {
+    await signIn.create({ identifier, password });
     redirectIfSignedIn();
   };
 

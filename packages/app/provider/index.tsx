@@ -6,10 +6,11 @@ import { TRPCProvider } from './trpc'; //mobile only
 
 export function Provider({
   children,
+  pageProps,
   ...rest
-}: Omit<TamaguiProviderProps, 'config'>) {
+}: Omit<TamaguiProviderProps, 'config'> & { pageProps: any }) {
   return (
-    <AuthProvider>
+    <AuthProvider pageProps={pageProps}>
       <TamaguiProvider
         config={config}
         disableInjectCSS

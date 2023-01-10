@@ -19,10 +19,10 @@ export function HomeScreen() {
     href: `/user/${userId || 'jcgertig'}`,
   });
   const signInLinkProps = useLink({
-    href: '/signin',
+    href: '/sign-in',
   });
   const signUpLinkProps = useLink({
-    href: '/signup',
+    href: '/sign-up',
   });
 
   const { data, isLoading, error } = trpc.entry.all.useQuery();

@@ -17,7 +17,7 @@ export const handleOAuthSignUp = async (
     });
 
     await signUp.create({
-      strategy: strategy,
+      strategy,
       redirectUrl,
     });
 
@@ -35,7 +35,7 @@ export const handleOAuthSignUp = async (
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
     const { type, params } = result || {};
-    console.log;
+    console.log('result', result);
     if (type !== 'success') {
       throw 'Something went wrong during the OAuth flow. Try again.';
     }
@@ -43,7 +43,9 @@ export const handleOAuthSignUp = async (
     // Get the rotatingTokenNonce from the redirect URL parameters
     const { rotating_token_nonce: rotatingTokenNonce } = params;
 
-    await signUp.reload({ rotatingTokenNonce });
+    const res = await signUp.reload({ rotatingTokenNonce });
+
+    console.log('res', res, signUp);
 
     const { createdSessionId } = signUp;
 

@@ -127,7 +127,7 @@ export const SignUpSignInComponent: React.FC<Props> = ({
             ? 'Already have an account?'
             : 'Don’t have an account?'}
         </Paragraph>
-        <Link href={type === 'sign-up' ? '/signin' : '/signup'}>
+        <Link href={type === 'sign-up' ? '/sign-in' : '/sign-up'}>
           <Paragraph
             cursor={'pointer'}
             size="$2"

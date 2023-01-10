@@ -19,19 +19,29 @@ function MyApp({ Component, pageProps }: SolitoAppProps) {
         <meta name="description" content="Tamagui, Solito, Expo & Next.js" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <ThemeProvider>
+      <ThemeProvider pageProps={pageProps}>
         <Component {...pageProps} />
       </ThemeProvider>
     </>
   );
 }
 
-function ThemeProvider({ children }: { children: React.ReactNode }) {
+function ThemeProvider({
+  children,
+  pageProps,
+}: {
+  children: React.ReactNode;
+  pageProps: any;
+}) {
   const [theme, setTheme] = useRootTheme();
 
   return (
     <NextThemeProvider onChangeTheme={setTheme}>
-      <Provider disableRootThemeClass defaultTheme={theme}>
+      <Provider
+        pageProps={pageProps}
+        disableRootThemeClass
+        defaultTheme={theme}
+      >
         {children}
       </Provider>
     </NextThemeProvider>

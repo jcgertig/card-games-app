@@ -32,6 +32,7 @@ module.exports = {
     '@typescript-eslint/no-unsafe-member-access': 'off',
     '@typescript-eslint/no-unsafe-return': 'off',
     '@typescript-eslint/no-non-null-assertion': 'off',
+    '@typescript-eslint/no-unsafe-call': 'off',
     'node/no-extraneous-import': 'off',
     'node/no-extraneous-require': 'off',
     'no-unused-vars': ["error", { "argsIgnorePattern": "^_" }],

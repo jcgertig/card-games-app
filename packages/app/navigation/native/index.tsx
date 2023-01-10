@@ -3,17 +3,17 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 import { HomeScreen } from '../../features/home/screen';
 import { UserDetailScreen } from '../../features/user/detail-screen';
-import { SignInScreen } from '../../features/signin/screen';
-import { SignUpScreen } from '../../features/signup/screen';
-import { EmailVerificationScreen } from '../../features/signup/email-verification/screen';
+import { SignInScreen } from '../../features/sign-in/screen';
+import { SignUpScreen } from '../../features/sign-up/screen';
+import { EmailVerificationScreen } from '../../features/sign-up/email-verification/screen';
 
 const Stack = createNativeStackNavigator<{
   home: undefined;
   'user-detail': {
     id: string;
   };
-  signin: undefined;
-  signup: undefined;
+  'sign-in': undefined;
+  'sign-up': undefined;
   'email-verification': undefined;
 }>();
 
@@ -36,14 +36,14 @@ export function NativeNavigation() {
         }}
       />
       <Stack.Screen
-        name="signin"
+        name="sign-in"
         component={SignInScreen}
         options={{
           title: 'Sign In',
         }}
       />
       <Stack.Screen
-        name="signup"
+        name="sign-up"
         component={SignUpScreen}
         options={{
           title: 'Sign Up',

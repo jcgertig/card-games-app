@@ -1,14 +1,19 @@
 import { YStack } from '@my/ui';
 import { handleOAuthSignUp } from 'app/utils/auth';
-import { useSignUp } from 'app/utils/clerk';
+import { useSignUp, useAuth } from 'app/utils/clerk';
 import { OAuthStrategy } from '@clerk/types';
 import { useRouter } from 'solito/router';
 import { SignUpSignInComponent } from '@my/ui/src/components/SignUpSignIn';
 
 export function SignUpScreen() {
   const { push } = useRouter();
-
   const { isLoaded, signUp, setSession } = useSignUp();
+
+  const { isSignedIn } = useAuth();
+  if (isSignedIn) {
+    push('/');
+    return null;
+  }
 
   if (!setSession) return null;
   if (!isLoaded) return null;
@@ -21,15 +26,13 @@ export function SignUpScreen() {
   };
 
   const handleEmailSignUpWithPress = async (emailAddress, password) => {
-    console.log('emailAddress', emailAddress);
-    console.log('password', password);
     await signUp.create({
       emailAddress,
       password,
     });
 
     await signUp.prepareEmailAddressVerification();
-    push('/signup/email-verification');
+    push('/sign-up/email-verification');
   };
 
   return (

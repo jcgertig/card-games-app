@@ -18,14 +18,14 @@ export const handleOAuthSignUp = async (
   signUp: SignUpResource
 ) => {
   try {
-    console.log('hihihi');
     await signUp.authenticateWithRedirect({
       strategy,
-      redirectUrl: `${getBaseUrl()}/signup`,
+      redirectUrl: `${getBaseUrl()}/sign-up`,
       redirectUrlComplete: `${getBaseUrl()}/`,
     });
 
-    //get session
+    // get session
+    // console.log('web sign up', JSON.stringify(signUp));
     const { createdSessionId } = signUp;
     if (!createdSessionId) {
       throw 'Something went wrong during the Sign up flow. Please ensure that all sign up requirements are met.';
@@ -45,7 +45,7 @@ export const handleOAuthSignIn = async (
   try {
     await signIn.authenticateWithRedirect({
       strategy,
-      redirectUrl: `${getBaseUrl()}/signup`,
+      redirectUrl: `${getBaseUrl()}/sign-up`,
       redirectUrlComplete: `${getBaseUrl()}/`,
     });
   } catch (err) {

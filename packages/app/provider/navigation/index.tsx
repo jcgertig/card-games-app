@@ -17,9 +17,9 @@ export function NavigationProvider({
             screens: {
               home: '',
               'user-detail': 'user/:id',
-              signin: 'signin',
-              signup: 'signup',
-              'email-verification': 'signup/email-verification',
+              'sign-in': 'sign-in',
+              'sign-up': 'sign-up',
+              'email-verification': 'sign-up/email-verification',
             },
           },
         }),
