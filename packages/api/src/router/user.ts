@@ -6,4 +6,7 @@ export const userRouter = router({
   search: protectedProcedure.input(z.string()).query(({ input }) => {
     return clerkClient.users.getUserList({ query: input, limit: 10 });
   }),
+  invite: protectedProcedure.input(z.string()).query(({ input }) => {
+    return clerkClient.invitations.createInvitation({ emailAddress: input });
+  }),
 });
