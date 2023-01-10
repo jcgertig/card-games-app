@@ -1,11 +1,11 @@
 import { router } from '../trpc';
-import { entryRouter } from './entry';
+import { gameRouter } from './game';
 import { authRouter } from './auth';
-import { userRouter } from './user';
+import { roomRouter } from './room';
 
 export const appRouter = router({
-  entry: entryRouter,
-  user: userRouter,
+  game: gameRouter,
+  room: roomRouter,
   auth: authRouter,
 });
 

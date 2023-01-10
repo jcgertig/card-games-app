@@ -25,7 +25,7 @@ export function HomeScreen() {
     href: '/sign-up',
   });
 
-  const { data, isLoading, error } = trpc.entry.all.useQuery();
+  const { data, isLoading, error } = trpc.game.all.useQuery();
 
   useEffect(() => {
     console.log(data);
