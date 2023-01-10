@@ -7,6 +7,7 @@ import {
   SignIn,
   SignUp,
   UserProfile,
+  UserButton,
 } from '@clerk/nextjs';
 export {
   SignedIn,
@@ -17,4 +18,5 @@ export {
   SignIn,
   SignUp,
   UserProfile,
+  UserButton,
 };
